@@ -1,0 +1,20 @@
+.policy-container{
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+    padding: 2%;
+    margin: 2%;
+    gap: 5%;
+}
+.policy-img img{
+    width: 90%;
+}
+.policy-info h4{
+    font-weight:700;
+    font-size:2.5rem;
+}
+.policy-info p{
+    font-weight: 700;
+    font-size: 1.2rem;
+}
