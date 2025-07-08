@@ -10,9 +10,10 @@ const Orders = () => {
     const [orders, setOrders] = useState([])
     const [auth, setAuth] = useAuth()
     const navigate = useNavigate()
+    const baseURL = process.env.REACT_APP_API_BASE_URL
     const getOrders = async () => {
         try {
-            const { data } = await axios.get('/api/v1/auth/orders')
+            const { data } = await axios.get(`${baseURL}/api/v1/auth/orders`)
             setOrders(data)
         } catch (error) {
             console.log(error)
@@ -62,7 +63,7 @@ const Orders = () => {
                                                     <div className='col-md-6 d-flex flex-row'>
                                                         {o?.products?.map((item) => (
                                                             <div className="card m-2" key={item._id} style={{ width: "15rem" }}>
-                                                                <img src={`/api/v1/product/product-photo/${item._id}`} className="card-img-top" alt={item.name} />
+                                                                <img src={`${baseURL}/api/v1/product/product-photo/${item._id}`} className="card-img-top" alt={item.name} />
                                                                 <div className="card-body">
                                                                     <h5 className="card-title">{item.name}</h5>
                                                                     <p className="card-text">{(item.description.length > 30) ? item.description.substring(0, 30) + "..." : item.description}</p>

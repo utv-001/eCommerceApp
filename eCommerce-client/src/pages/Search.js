@@ -3,6 +3,7 @@ import { useSearch } from '../context/search'
 
 const Search = ()=>{
     const [values, setValues] = useSearch()
+    const baseURL = process.env.REACT_APP_API_BASE_URL
     return(
         <Layout title={'Search results'}>
             <div className='container'>
@@ -12,7 +13,7 @@ const Search = ()=>{
                     <div className='d-flex flex-wrap mt-4'>
                         {values?.results?.map((item) => (
                             <div className="card m-2" key={item._id} style={{ width: "18rem" }}>
-                                <img src={`/api/v1/product/product-photo/${item._id}`} className="card-img-top" alt={item.name} />
+                                <img src={`${baseURL}/api/v1/product/product-photo/${item._id}`} className="card-img-top" alt={item.name} />
                                 <div className="card-body">
                                     <h5 className="card-title">{item.name}</h5>
                                     <p className="card-text">{(item.description.length > 30) ? item.description.substring(0, 30) + "..." : item.description}</p>

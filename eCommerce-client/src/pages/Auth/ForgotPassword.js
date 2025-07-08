@@ -9,13 +9,14 @@ const ForgotPassword = () => {
     const [email, setEmail] = useState("")
     const [newPassword, setNewPassword] = useState("")
     const [answer, setAnswer] = useState("")
+    const baseURL = process.env.REACT_APP_API_BASE_URL
     
     const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const res = await axios.post('/api/v1/auth/forgot-password', { email, answer, newPassword })
+            const res = await axios.post(`${baseURL}/api/v1/auth/forgot-password`, { email, answer, newPassword })
             if (res.data.success) {
                 toast.success(res.data.message)
                 navigate("/login")

@@ -13,7 +13,7 @@ const CartPage = () => {
     const navigate = useNavigate()
     const [clientToken, setClientToken] = useState("")
     const [loading, setLoading] = useState(false)
-
+    const baseURL = process.env.REACT_APP_API_BASE_URL
     const dropinContainerRef = useRef(null);
     const dropinInstanceRef = useRef(null);
 
@@ -47,7 +47,7 @@ const CartPage = () => {
     //get payment gateway token
     const getToken = async () => {
         try {
-            const { data } = await axios.get(`/api/v1/product/braintree/token`)
+            const { data } = await axios.get(`${baseURL}/api/v1/product/braintree/token`)
             // console.log(data)
             setClientToken(data?.clientToken)
         } catch (error) {
@@ -123,7 +123,7 @@ const CartPage = () => {
             }
             const nonce = payload.nonce;
             // console.log('Payment nonce:', nonce);
-            axios.post('/api/v1/product/braintree/payment', { nonce, cart })
+            axios.post(`${baseURL}/api/v1/product/braintree/payment`, { nonce, cart })
                 .then(({ data }) => {
                     setLoading(false);
                     localStorage.removeItem('cart');
@@ -157,7 +157,7 @@ const CartPage = () => {
                         {cart?.map((item) => (
                             <div className='row m-2 p-3 card flex-row' key={item._id}>
                                 <div className='col-md-4'>
-                                    <img src={`/api/v1/product/product-photo/${item._id}`} className="card-img-top" alt={item.name} width="100px" height="100px" />
+                                    <img src={`${baseURL}/api/v1/product/product-photo/${item._id}`} className="card-img-top" alt={item.name} width="100px" height="100px" />
                                 </div>
                                 <div className='col-md-8'>
                                     <p>{item.name}</p>

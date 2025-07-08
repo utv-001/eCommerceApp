@@ -13,11 +13,12 @@ const Register = () => {
     const [address, setAddress] = useState("")
     const [answer, setAnswer] = useState("")
     const navigate = useNavigate()
+    const baseURL = process.env.REACT_APP_API_BASE_URL
 
     const handleSubmit = async (e)=>{
         e.preventDefault()
         try{
-            const res = await axios.post('/api/v1/auth/register', {name, email, password, phone, address, answer} )
+            const res = await axios.post(`${baseURL}/api/v1/auth/register`, {name, email, password, phone, address, answer} )
             if(res.data.success){
                 toast.success(res.data.message)
                 navigate('/login')

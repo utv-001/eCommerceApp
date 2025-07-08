@@ -8,7 +8,7 @@ const CategoryProduct = () => {
     const [products, setProducts] = useState([])
     const [category, setCategory] = useState([])
     const navigate = useNavigate()
-
+    const baseURL = process.env.REACT_APP_API_BASE_URL
     useEffect(() => {
         if (params?.slug) {
             getProductsByCategory()
@@ -17,7 +17,7 @@ const CategoryProduct = () => {
 
     const getProductsByCategory = async () => {
         try {
-            const { data } = await axios.get(`/api/v1/product/product-category/${params.slug}`)
+            const { data } = await axios.get(`${baseURL}/api/v1/product/product-category/${params.slug}`)
             setProducts(data?.products)
             setCategory(data?.category)
         } catch (error) {
@@ -33,7 +33,7 @@ const CategoryProduct = () => {
                     <div className='d-flex flex-wrap'>
                         {products?.map((item) => (
                             <div className="card m-2" key={item._id} style={{ width: "18rem" }}>
-                                <img src={`/api/v1/product/product-photo/${item._id}`} className="card-img-top" alt={item.name} />
+                                <img src={`${baseURL}/api/v1/product/product-photo/${item._id}`} className="card-img-top" alt={item.name} />
                                 <div className="card-body">
                                     <h5 className="card-title">{item.name}</h5>
                                     <p className="card-text">{(item.description.length > 30) ? item.description.substring(0, 30) + "..." : item.description}</p>

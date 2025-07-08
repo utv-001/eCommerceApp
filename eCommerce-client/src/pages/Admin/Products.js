@@ -7,11 +7,12 @@ import { Link } from 'react-router-dom'
 
 export default function Products() {
     const [products, setProducts] = useState([])
+    const baseURL = process.env.REACT_APP_API_BASE_URL
 
     //get all products
     const getAllProducts = async () => {
         try {
-            const { data } = await axios.get("/api/v1/product/get-product")
+            const { data } = await axios.get(`${baseURL}/api/v1/product/get-product`)
             if (data?.success) {
                 toast.success(data?.message)
                 setProducts(data?.products)
@@ -38,7 +39,7 @@ export default function Products() {
                         {products?.map((item) => (
                             <Link to={`/dashboard/admin/product/${item.slug}`} key={item._id} className='product-link'>
                                 <div className="card m-2" style={{ width: "18rem" }}>
-                                    <img src={`/api/v1/product/product-photo/${item._id}`} className="card-img-top" alt={item.name} />
+                                    <img src={`${baseURL}/api/v1/product/product-photo/${item._id}`} className="card-img-top" alt={item.name} />
                                     <div className="card-body">
                                         <h5 className="card-title">{item.name}</h5>
                                         <p className="card-text">{(item.description.length > 30) ? item.description.substring(0, 30) + "..." : item.description}</p>

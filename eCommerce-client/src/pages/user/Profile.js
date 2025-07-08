@@ -14,6 +14,7 @@ const Profile = () => {
     const [password, setPassword] = useState("")
     const [phone, setPhone] = useState("")
     const [address, setAddress] = useState("")
+    const baseURL = process.env.REACT_APP_API_BASE_URL
 
     useEffect(()=>{
         const {name, email, phone, address} = auth?.user
@@ -26,7 +27,7 @@ const Profile = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const {data} = await axios.put('/api/v1/auth/profile', { name, password, phone, address })
+            const {data} = await axios.put(`${baseURL}/api/v1/auth/profile`, { name, password, phone, address })
             if (data?.error) {
                 toast.error(data?.error)
             } else {

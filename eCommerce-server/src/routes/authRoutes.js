@@ -1,11 +1,13 @@
 import { Router } from 'express'
-import {registerController, loginController, testController, forgotPasswordController, updateProfileController, getOrdersController, getAllOrdersController, orderStatusController} from '../controllers/authController.js'
+import {registerController, loginController, testController, forgotPasswordController, updateProfileController, getOrdersController, getAllOrdersController, orderStatusController, getAllUsers} from '../controllers/authController.js'
 import {requireSignIn, isAdmin} from '../middleware/authMiddleware.js'
 
 const router = Router()
 
 //register user
 router.post('/register', registerController)
+//get users
+router.get('/users', requireSignIn, isAdmin, getAllUsers)
 //login user
 router.post('/login', loginController)
 //forgot password

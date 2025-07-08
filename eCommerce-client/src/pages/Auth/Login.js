@@ -12,11 +12,12 @@ const Login = () => {
     const [auth, setAuth] = useAuth()
     const navigate = useNavigate()
     const location = useLocation()
+    const baseURL = process.env.REACT_APP_API_BASE_URL
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const res = await axios.post('/api/v1/auth/login', { email, password })
+            const res = await axios.post(`${baseURL}/api/v1/auth/login`, { email, password })
             if (res.data.success) {
                 toast.success(res.data.message)
                 setAuth({

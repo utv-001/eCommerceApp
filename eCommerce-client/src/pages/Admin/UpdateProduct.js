@@ -19,6 +19,7 @@ const UpdateProduct = () => {
     const [productId, setProductId] = useState()
     const [id, setId] = useState()
     const [visible, setVisible] = useState(false)
+    const baseURL = process.env.REACT_APP_API_BASE_URL
 
     const navigate = useNavigate()
     const params = useParams()
@@ -26,7 +27,7 @@ const UpdateProduct = () => {
     //get single product
     const getSingleproduct = async () => {
         try {
-            const { data } = await axios.get(`/api/v1/product/get-product/${params.slug}`)
+            const { data } = await axios.get(`${baseURL}/api/v1/product/get-product/${params.slug}`)
             // console.log(data.product)
             if (data?.success) {
                 setName(data?.product?.name)
@@ -47,7 +48,7 @@ const UpdateProduct = () => {
     //get all category
     const getAllCategory = async () => {
         try {
-            const { data } = await axios.get('/api/v1/category/all-categories')
+            const { data } = await axios.get(`${baseURL}/api/v1/category/all-categories`)
             if (data?.success) {
                 setCategories(data?.category)
             }
@@ -78,7 +79,7 @@ const UpdateProduct = () => {
             productData.append('price', price)
             productData.append('quantity', quantity)
             productData.append('shipping', shipping)
-            const { data } = await axios.put(`/api/v1/product/update-product/${productId}`, productData)
+            const { data } = await axios.put(`${baseURL}/api/v1/product/update-product/${productId}`, productData)
             if (data?.success) {
                 toast.success(data?.message)
                 navigate('/dashboard/admin/products')
@@ -94,7 +95,7 @@ const UpdateProduct = () => {
     //delete product
     const deleteProduct = async () => {
         try {
-            const { data } = await axios.delete(`/api/v1/product/delete-product/${productId}`)
+            const { data } = await axios.delete(`${baseURL}/api/v1/product/delete-product/${productId}`)
             if (data?.success) {
                 toast.success(data?.message)
                 navigate('/dashboard/admin/products')
@@ -141,7 +142,7 @@ const UpdateProduct = () => {
                                     </div>
                                 ) : (
                                     <div className='text-center'>
-                                        <img src={`/api/v1/product/product-photo/${productId}`} alt={name} height={'200px'} className='img img-responsive' />
+                                        <img src={`${baseURL}/api/v1/product/product-photo/${productId}`} alt={name} height={'200px'} className='img img-responsive' />
                                     </div>
                                 )}
                             </div>

@@ -1,7 +1,6 @@
 {
   "name": "ecommerce-client",
   "version": "0.1.0",
-  "proxy": "https://ecommerceapp-vukm.onrender.com",
   "private": true,
   "dependencies": {
     "@ant-design/v5-patch-for-react-19": "^1.0.3",

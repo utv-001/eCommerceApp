@@ -15,13 +15,14 @@ const CreateProduct = () => {
     const [price, setPrice] = useState(0)
     const [quantity, setQuantity] = useState(0)
     const [shipping, setShipping] = useState()
+    const baseURL = process.env.REACT_APP_API_BASE_URL
 
     const navigate = useNavigate()
 
     //get all category
     const getAllCategory = async () => {
         try {
-            const { data } = await axios.get('/api/v1/category/all-categories')
+            const { data } = await axios.get(`${baseURL}/api/v1/category/all-categories`)
             if (data?.success) {
                 setCategories(data?.category)
             }
@@ -51,7 +52,7 @@ const CreateProduct = () => {
             productData.append('price', price)
             productData.append('quantity', quantity)
             productData.append('shipping', shipping)
-            const { data } = await axios.post('/api/v1/product/create-product', productData)
+            const { data } = await axios.post(`${baseURL}/api/v1/product/create-product`, productData)
             if (data?.success) {
                 toast.success(data?.message)
                 navigate('/dashboard/admin/products')
